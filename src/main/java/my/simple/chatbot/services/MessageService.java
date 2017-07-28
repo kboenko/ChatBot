@@ -45,27 +45,6 @@ public class MessageService {
                     elusiveAnswers.get(rnd.nextInt(elusiveAnswers.size())):
                     commonAnswers.get(rnd.nextInt(commonAnswers.size()));
 
-
-
-            /*if (msg.trim().endsWith("?")) {
-                String message = String.join(" ", msg.toLowerCase().split("[ {,|.}?]+"));
-                    for(Map.Entry<String,String> o : questionPatterns.entrySet()) {
-                        pattern = Pattern.compile(o.getKey());
-                        System.out.println("Ключ: " + o.getKey() + " , паттерн: " + pattern);
-                            if(pattern.matcher(message).find()) {
-                                System.out.println("Нашли!");
-                                return answersPatterns.get(o.getValue());
-                            } //else return elusiveAnswers.get(rnd.nextInt(elusiveAnswers.size()));
-                    }
-            } else {
-                return commonAnswers.get(rnd.nextInt(commonAnswers.size()));
-            }*/
-
-                /*{
-                return (msg.trim().endsWith("?"))?
-                        elusiveAnswers.get(rnd.nextInt(elusiveAnswers.size())):
-                        commonAnswers.get(rnd.nextInt(commonAnswers.size()));
-            }*/
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
