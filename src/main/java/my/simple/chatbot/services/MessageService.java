@@ -30,12 +30,24 @@ public class MessageService {
             pQuestions = FileUtils.readAnswersFile(ResourceUtils.getFile(this.getClass().getResource("/questions_templates")));
             pAnswers = FileUtils.readAnswersFile(ResourceUtils.getFile(this.getClass().getResource("/answers_templates")));
             questionPatterns = FileUtils.getPatterns(pQuestions);
-            System.out.println("*********************************************************************************");
-                printMap(questionPatterns);
-            System.out.println("*********************************************************************************");
             answersPatterns = FileUtils.getPatterns(pAnswers);
 
-            if (msg.trim().endsWith("?")) {
+            String message = String.join(" ", msg.toLowerCase().split("[ {,|.}?]+"));
+            for(Map.Entry<String,String> o : questionPatterns.entrySet()) {
+                pattern = Pattern.compile(o.getKey());
+                if(pattern.matcher(message).find()) {
+                    System.out.println("Нашли!");
+                    return answersPatterns.get(o.getValue());
+                }
+            }
+
+            return (msg.trim().endsWith("?"))?
+                    elusiveAnswers.get(rnd.nextInt(elusiveAnswers.size())):
+                    commonAnswers.get(rnd.nextInt(commonAnswers.size()));
+
+
+
+            /*if (msg.trim().endsWith("?")) {
                 String message = String.join(" ", msg.toLowerCase().split("[ {,|.}?]+"));
                     for(Map.Entry<String,String> o : questionPatterns.entrySet()) {
                         pattern = Pattern.compile(o.getKey());
@@ -43,11 +55,11 @@ public class MessageService {
                             if(pattern.matcher(message).find()) {
                                 System.out.println("Нашли!");
                                 return answersPatterns.get(o.getValue());
-                            } else return elusiveAnswers.get(rnd.nextInt(elusiveAnswers.size()));
+                            } //else return elusiveAnswers.get(rnd.nextInt(elusiveAnswers.size()));
                     }
             } else {
                 return commonAnswers.get(rnd.nextInt(commonAnswers.size()));
-            }
+            }*/
 
                 /*{
                 return (msg.trim().endsWith("?"))?
