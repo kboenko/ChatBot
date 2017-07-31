@@ -30,14 +30,12 @@ public class MessageService {
             pQuestions = FileUtils.readAnswersFile(ResourceUtils.getFile(this.getClass().getResource("/questions_templates")));
             pAnswers = FileUtils.readAnswersFile(ResourceUtils.getFile(this.getClass().getResource("/answers_templates")));
             questionPatterns = FileUtils.getPatterns(pQuestions);
-            printMap(questionPatterns);
             answersPatterns = FileUtils.getPatterns(pAnswers);
 
             String message = String.join(" ", msg.toLowerCase().split("[ {,|.}?]+"));
             for(Map.Entry<String,String> o : questionPatterns.entrySet()) {
                 pattern = Pattern.compile(o.getKey());
                 if(pattern.matcher(message).find()) {
-                    System.out.println("Нашли!");
                     return answersPatterns.get(o.getValue());
                 }
             }
