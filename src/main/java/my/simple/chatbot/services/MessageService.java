@@ -30,6 +30,7 @@ public class MessageService {
             pQuestions = FileUtils.readAnswersFile(ResourceUtils.getFile(this.getClass().getResource("/questions_templates")));
             pAnswers = FileUtils.readAnswersFile(ResourceUtils.getFile(this.getClass().getResource("/answers_templates")));
             questionPatterns = FileUtils.getPatterns(pQuestions);
+            printMap(questionPatterns);
             answersPatterns = FileUtils.getPatterns(pAnswers);
 
             String message = String.join(" ", msg.toLowerCase().split("[ {,|.}?]+"));
@@ -53,7 +54,7 @@ public class MessageService {
 
     private void printMap(Map<String, String> map) {
         for (Map.Entry entry : map.entrySet()) {
-            System.out.println(entry.getKey() + "     " + entry.getValue());
+            System.out.println("\"" + entry.getKey() + "\"     \"" + entry.getValue() + "\"");
         }
     }
 
